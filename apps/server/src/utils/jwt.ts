@@ -7,10 +7,11 @@ if (!JWT_SECRET) {
 }
 const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || "7d";
 
-interface JwtPayload {
+export interface JwtPayload {
   id: string;
   email: string;
   role: string;
+  purpose?: string;
 }
 
 export const generateToken = (payload: JwtPayload, expiresIn?: string): string => {

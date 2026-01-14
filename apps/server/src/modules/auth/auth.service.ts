@@ -1,7 +1,7 @@
 import { prisma } from "../../utils/prisma";
 import { hashPassword, comparePassword } from "../../utils/password";
 import { generateToken, verifyToken } from "../../utils/jwt";
-import { ConflictError, UnauthorizedError, BadRequestError } from "../../utils/errors";
+import { ConflictError, UnauthorizedError, BadRequestError, ForbiddenError } from "../../utils/errors";
 import { sendVerificationEmail, sendWelcomeEmail } from "../../utils/email";
 import { sendWelcomeEmail as sendWelcomeNotification } from "../../services/notification.service";
 import type { RegisterInput, LoginInput } from "./auth.validation";

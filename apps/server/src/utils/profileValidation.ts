@@ -1,4 +1,4 @@
-interface ProfileCompletionResult {
+export interface ProfileCompletionResult {
   isComplete: boolean;
   missing: string[];
   completionPercentage: number;
