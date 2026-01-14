@@ -1,0 +1,173 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  USER
+  HOST
+  ADMIN
+}
+
+enum EventStatus {
+  OPEN
+  FULL
+  CANCELLED
+  COMPLETED
+}
+
+enum ReportType {
+  EVENT
+  REVIEW
+  USER
+}
+
+enum ReportStatus {
+  PENDING
+  REVIEWED
+  RESOLVED
+  DISMISSED
+}
+
+model User {
+  id                String         @id @default(cuid())
+  email             String         @unique
+  password          String
+  name              String
+  avatar            String?
+  bio               String?
+  role              UserRole       @default(USER)
+  verified          Boolean        @default(false)
+  rating            Float?
+  reviewCount       Int            @default(0)
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+
+  // Email Verification
+  emailVerified     Boolean        @default(false)
+  verificationToken String?
+  verificationTokenExpiry DateTime?
+
+  // Profile Completion
+  location          String?
+  interests         String[]
+
+  // Host Requirements
+  acceptedHostTerms Boolean        @default(false)
+  hostTermsAcceptedAt DateTime?
+
+  // Admin/Moderation
+  suspended         Boolean        @default(false)
+  suspendedAt       DateTime?
+  suspendedReason   String?
+
+  // Email Preferences
+  emailPreferences  Json?          // Stores notification preferences
+
+  // Relations
+  eventsHosted      Event[]        @relation("EventHost")
+  participations    Participant[]
+  reviews           Review[]
+  reviewsReceived   Review[]       @relation("ReviewsReceived")
+  reportsCreated    Report[]       @relation("ReportsCreated")
+  reportResolutions Report[]       @relation("ReportResolutions")
+}
+
+model Event {
+  id                String         @id @default(cuid())
+  title             String
+  description       String
+  eventType         String
+  location          String
+  latitude          Float?
+  longitude         Float?
+  date              DateTime
+  maxParticipants   Int
+  currentCount      Int            @default(0)
+  price             Float          @default(0)
+  status            EventStatus    @default(OPEN)
+  imageUrl          String?
+  tags              String[]
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+
+  // Relations
+  hostId            String
+  host              User           @relation("EventHost", fields: [hostId], references: [id], onDelete: Cascade)
+  participants      Participant[]
+  reviews           Review[]
+
+  @@index([date])
+  @@index([hostId])
+  @@index([status])
+  @@index([hostId, status])
+}
+
+model Participant {
+  id                String         @id @default(cuid())
+  joinedAt          DateTime       @default(now())
+  attended          Boolean        @default(false)
+
+  // Payment fields
+  paymentStatus     String?        // PENDING, COMPLETED, FAILED
+  paymentIntentId   String?        @unique
+  amountPaid        Float?
+
+  // Relations
+  userId            String
+  user              User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  eventId           String
+  event             Event          @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, eventId])
+  @@index([userId])
+  @@index([eventId])
+  @@index([paymentStatus])
+}
+
+model Review {
+  id                String         @id @default(cuid())
+  rating            Int            // 1-5
+  comment           String?
+  createdAt         DateTime       @default(now())
+
+  // Relations
+  eventId           String
+  event             Event          @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  reviewerId        String
+  reviewer          User           @relation(fields: [reviewerId], references: [id], onDelete: Cascade)
+  reviewedUserId    String
+  reviewedUser      User           @relation("ReviewsReceived", fields: [reviewedUserId], references: [id], onDelete: Cascade)
+
+  @@unique([eventId, reviewerId, reviewedUserId])
+  @@index([eventId])
+  @@index([reviewedUserId])
+}
+
+model Report {
+  id                String         @id @default(cuid())
+  reportedType      ReportType
+  reportedId        String         // ID of reported item
+  reason            String
+  description       String?
+  status            ReportStatus   @default(PENDING)
+  createdAt         DateTime       @default(now())
+  resolvedAt        DateTime?
+
+  // Relations
+  reporterId        String
+  reporter          User           @relation("ReportsCreated", fields: [reporterId], references: [id], onDelete: Cascade)
+  resolvedById      String?
+  resolvedBy        User?          @relation("ReportResolutions", fields: [resolvedById], references: [id])
+
+  @@index([status])
+  @@index([reporterId])
+  @@index([reportedType, status])
+}

@@ -1,0 +1,22 @@
+name: Send Event Reminders
+
+on:
+  schedule:
+    # Run every day at 9:00 AM UTC (4:00 AM EST / 1:00 AM PST)
+    - cron: '0 9 * * *'
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  send-reminders:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send Event Reminders
+        run: |
+          curl -X POST https://your-api-url.com/api/cron/event-reminders \
+            -H "x-cron-secret: ${{ secrets.CRON_SECRET }}" \
+            -H "Content-Type: application/json"
+
+      - name: Check Status
+        if: failure()
+        run: echo "Failed to send event reminders"
