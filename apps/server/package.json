@@ -16,6 +16,7 @@
     "seed": "node prisma/seed.js"
   },
   "dependencies": {
+    "@prisma/client": "6.19.1",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^2.8.0",
     "cors": "^2.8.5",
@@ -30,7 +31,6 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@prisma/client": "6.19.1",
     "@types/bcryptjs": "^2.4.6",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
