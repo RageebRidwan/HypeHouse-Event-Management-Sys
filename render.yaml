@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: hypehouse-backend
+    runtime: node
+    region: oregon
+    plan: free
+    buildCommand: cd apps/server && npm install && npx prisma generate
+    startCommand: cd apps/server && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+      - key: CLIENT_URL
+        value: https://your-vercel-app.vercel.app
+    healthCheckPath: /api/health

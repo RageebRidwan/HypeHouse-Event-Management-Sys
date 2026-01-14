@@ -1,7 +1,7 @@
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:3000";
+const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:3000";
 
 /**
  * Send verification email to new user
@@ -11,7 +11,7 @@ export async function sendVerificationEmail(
   name: string,
   token: string
 ): Promise<void> {
-  const verificationUrl = `${FRONTEND_URL}/verify-email?token=${token}`;
+  const verificationUrl = `${CLIENT_URL}/verify-email?token=${token}`;
 
   try {
     await resend.emails.send({
@@ -123,14 +123,14 @@ export async function sendWelcomeEmail(
               </ul>
 
               <div style="text-align: center; margin: 35px 0;">
-                <a href="${FRONTEND_URL}/events" style="display: inline-block; background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%); color: white; padding: 16px 40px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 6px rgba(124, 58, 237, 0.3);">
+                <a href="${CLIENT_URL}/events" style="display: inline-block; background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%); color: white; padding: 16px 40px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 6px rgba(124, 58, 237, 0.3);">
                   Explore Events
                 </a>
               </div>
 
               <div style="margin-top: 40px; padding-top: 30px; border-top: 1px solid #e5e7eb;">
                 <p style="color: #6b7280; font-size: 14px;">
-                  Need help getting started? Check out our <a href="${FRONTEND_URL}/help" style="color: #7c3aed; text-decoration: none;">Help Center</a> or reply to this email.
+                  Need help getting started? Check out our <a href="${CLIENT_URL}/help" style="color: #7c3aed; text-decoration: none;">Help Center</a> or reply to this email.
                 </p>
               </div>
             </div>
@@ -193,7 +193,7 @@ export async function sendEventJoinedEmail(
               </div>
 
               <div style="text-align: center; margin: 35px 0;">
-                <a href="${FRONTEND_URL}/dashboard" style="display: inline-block; background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%); color: white; padding: 16px 40px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 6px rgba(124, 58, 237, 0.3);">
+                <a href="${CLIENT_URL}/dashboard" style="display: inline-block; background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%); color: white; padding: 16px 40px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 6px rgba(124, 58, 237, 0.3);">
                   View My Events
                 </a>
               </div>
@@ -266,7 +266,7 @@ export async function sendEventReminderEmail(
               </p>
 
               <div style="text-align: center; margin: 35px 0;">
-                <a href="${FRONTEND_URL}/dashboard" style="display: inline-block; background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%); color: white; padding: 16px 40px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 6px rgba(124, 58, 237, 0.3);">
+                <a href="${CLIENT_URL}/dashboard" style="display: inline-block; background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%); color: white; padding: 16px 40px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 6px rgba(124, 58, 237, 0.3);">
                   View Event Details
                 </a>
               </div>
@@ -322,7 +322,7 @@ export async function sendNewParticipantEmail(
               </p>
 
               <div style="text-align: center; margin: 35px 0;">
-                <a href="${FRONTEND_URL}/dashboard" style="display: inline-block; background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%); color: white; padding: 16px 40px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 6px rgba(124, 58, 237, 0.3);">
+                <a href="${CLIENT_URL}/dashboard" style="display: inline-block; background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%); color: white; padding: 16px 40px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 6px rgba(124, 58, 237, 0.3);">
                   View Participants
                 </a>
               </div>

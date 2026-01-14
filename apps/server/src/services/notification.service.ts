@@ -254,7 +254,7 @@ export const sendUpcomingEventReminders = async () => {
         // For now, send to everyone
 
         const eventDate = new Date(event.date);
-        const eventUrl = `${process.env.FRONTEND_URL}/events/${event.id}`;
+        const eventUrl = `${process.env.CLIENT_URL}/events/${event.id}`;
 
         await sendEventReminder({
           to: participant.user.email,

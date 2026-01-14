@@ -140,7 +140,7 @@ export class ParticipantsService {
       // Send booking confirmation email (don't wait for it)
       if (updatedEvent) {
         const eventDate = new Date(updatedEvent.date);
-        const eventUrl = `${process.env.FRONTEND_URL}/events/${updatedEvent.id}`;
+        const eventUrl = `${process.env.CLIENT_URL}/events/${updatedEvent.id}`;
 
         sendBookingConfirmation({
           to: participant.user.email,

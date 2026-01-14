@@ -73,7 +73,7 @@ export const registerUser = async (
   );
 
   // Send welcome email with verification link
-  const verificationUrl = `${process.env.FRONTEND_URL}/verify-email?token=${verificationToken}`;
+  const verificationUrl = `${process.env.CLIENT_URL}/verify-email?token=${verificationToken}`;
   sendWelcomeNotification({ to: email, name, verificationUrl }).catch((error) =>
     console.error("Failed to send welcome email:", error)
   );

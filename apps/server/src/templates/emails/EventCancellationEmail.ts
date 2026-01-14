@@ -89,7 +89,7 @@ export const EventCancellationEmail = ({
         <table width="100%" cellpadding="0" cellspacing="0">
           <tr>
             <td align="center" style="padding: 0 0 30px 0;">
-              <a href="${process.env.FRONTEND_URL}/events" style="display: inline-block; padding: 16px 40px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);">
+              <a href="${process.env.CLIENT_URL}/events" style="display: inline-block; padding: 16px 40px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);">
                 Browse Other Events
               </a>
             </td>

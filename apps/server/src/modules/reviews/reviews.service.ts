@@ -94,7 +94,7 @@ export const createReview = async ({
   await updateHostRating(event.hostId);
 
   // Send notification to host (don't wait for it)
-  const eventUrl = `${process.env.FRONTEND_URL}/events/${eventId}`;
+  const eventUrl = `${process.env.CLIENT_URL}/events/${eventId}`;
   sendNewReviewNotification({
     to: event.host.email,
     hostName: event.host.name,
