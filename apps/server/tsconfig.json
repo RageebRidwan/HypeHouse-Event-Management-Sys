@@ -10,6 +10,11 @@
     "strictNullChecks": false,
     "strictFunctionTypes": false,
     "strictPropertyInitialization": false,
+    "noImplicitThis": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noImplicitReturns": false,
+    "noFallthroughCasesInSwitch": false,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": false,
@@ -17,7 +22,11 @@
     "moduleResolution": "node",
     "declaration": false,
     "declarationMap": false,
-    "sourceMap": false
+    "sourceMap": false,
+    "suppressImplicitAnyIndexErrors": true
+  },
+  "ts-node": {
+    "transpileOnly": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
