@@ -24,7 +24,6 @@ import Link from "next/link";
 export default function EventsManagement() {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
-  const [categoryFilter, setCategoryFilter] = useState<string>("");
   const [statusFilter, setStatusFilter] = useState<string>("");
   const [showFilters, setShowFilters] = useState(false);
 
@@ -32,7 +31,6 @@ export default function EventsManagement() {
     page,
     limit: 12,
     search: search || undefined,
-    category: categoryFilter || undefined,
     status: statusFilter || undefined,
   });
 
@@ -100,26 +98,7 @@ export default function EventsManagement() {
 
         {/* Filters */}
         {showFilters && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-xl bg-white/5 border border-white/10">
-            <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Category
-              </label>
-              <select
-                value={categoryFilter}
-                onChange={(e) => setCategoryFilter(e.target.value)}
-                className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 [&>option]:bg-gray-800 [&>option]:text-white"
-              >
-                <option value="">All Categories</option>
-                <option value="Music">Music</option>
-                <option value="Sports">Sports</option>
-                <option value="Arts">Arts</option>
-                <option value="Food">Food</option>
-                <option value="Tech">Tech</option>
-                <option value="Business">Business</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
+          <div className="p-4 rounded-xl bg-white/5 border border-white/10">
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-2">
                 Status
@@ -130,7 +109,8 @@ export default function EventsManagement() {
                 className="w-full px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 [&>option]:bg-gray-800 [&>option]:text-white"
               >
                 <option value="">All Status</option>
-                <option value="ACTIVE">Active</option>
+                <option value="OPEN">Open</option>
+                <option value="FULL">Full</option>
                 <option value="COMPLETED">Completed</option>
                 <option value="CANCELLED">Cancelled</option>
               </select>
@@ -148,7 +128,7 @@ export default function EventsManagement() {
               No Events Found
             </h3>
             <p className="text-gray-400">
-              {search || categoryFilter || statusFilter
+              {search || statusFilter
                 ? "Try adjusting your filters"
                 : "No events have been created yet"}
             </p>
@@ -172,8 +152,10 @@ export default function EventsManagement() {
                 <div className="absolute top-3 right-3">
                   <span
                     className={`px-3 py-1 rounded-full text-xs font-medium backdrop-blur-sm ${
-                      event.status === "ACTIVE"
+                      event.status === "OPEN"
                         ? "bg-green-500/80 text-white"
+                        : event.status === "FULL"
+                        ? "bg-yellow-500/80 text-white"
                         : event.status === "COMPLETED"
                         ? "bg-gray-500/80 text-white"
                         : "bg-red-500/80 text-white"

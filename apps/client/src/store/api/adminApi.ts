@@ -90,9 +90,7 @@ export interface GetAllEventsParams {
   page?: number;
   limit?: number;
   search?: string;
-  eventType?: string;
   status?: string;
-  hostId?: string;
 }
 
 export interface GetAllEventsResponse {
