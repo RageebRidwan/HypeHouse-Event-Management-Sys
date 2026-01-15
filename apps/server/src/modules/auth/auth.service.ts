@@ -53,6 +53,7 @@ export const registerUser = async (
       name,
       verificationToken,
       verificationTokenExpiry,
+      emailVerified: true, // TODO: Auto-verify for demo - remove this line to enable email verification
     },
     select: {
       id: true,
@@ -67,16 +68,18 @@ export const registerUser = async (
     },
   });
 
+  // TODO: Email verification disabled for demo
+  // Uncomment below to enable email verification
   // Send verification email (don't wait for it)
-  sendVerificationEmail(email, name, verificationToken).catch((error) =>
-    console.error("Failed to send verification email:", error)
-  );
+  // sendVerificationEmail(email, name, verificationToken).catch((error) =>
+  //   console.error("Failed to send verification email:", error)
+  // );
 
   // Send welcome email with verification link
-  const verificationUrl = `${process.env.CLIENT_URL}/verify-email?token=${verificationToken}`;
-  sendWelcomeNotification({ to: email, name, verificationUrl }).catch((error) =>
-    console.error("Failed to send welcome email:", error)
-  );
+  // const verificationUrl = `${process.env.CLIENT_URL}/verify-email?token=${verificationToken}`;
+  // sendWelcomeNotification({ to: email, name, verificationUrl }).catch((error) =>
+  //   console.error("Failed to send welcome email:", error)
+  // );
 
   // Generate JWT token for authentication
   const token = generateToken({
