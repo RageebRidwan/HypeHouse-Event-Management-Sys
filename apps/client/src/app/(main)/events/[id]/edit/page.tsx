@@ -161,7 +161,7 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
     }
 
     try {
-      await updateEvent({ id: eventId, data: formData as CreateEventInput }).unwrap();
+      await updateEvent({ id: eventId, data: formData as UpdateEventInput }).unwrap();
       toast.success("Event updated successfully!");
       router.push(`/events/${eventId}`);
     } catch (error: any) {
