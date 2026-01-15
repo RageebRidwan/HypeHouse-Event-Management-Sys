@@ -1,0 +1,40 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Gradient Definitions -->
+  <defs>
+    <linearGradient id="hypeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B5CF6;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#D946EF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#EC4899;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background Circle -->
+  <circle cx="32" cy="32" r="30" fill="url(#hypeGradient)" filter="url(#glow)"/>
+
+  <!-- Stylized "H" Letter -->
+  <g transform="translate(32, 32)">
+    <!-- Left vertical bar -->
+    <rect x="-14" y="-18" width="6" height="36" fill="white" rx="3"/>
+
+    <!-- Right vertical bar -->
+    <rect x="8" y="-18" width="6" height="36" fill="white" rx="3"/>
+
+    <!-- Horizontal bar (connecting middle) -->
+    <rect x="-14" y="-3" width="28" height="6" fill="white" rx="3"/>
+
+    <!-- Decorative sparkle/star top right -->
+    <circle cx="12" cy="-14" r="2.5" fill="#FCD34D" opacity="0.9"/>
+    <circle cx="12" cy="-14" r="1" fill="white"/>
+  </g>
+
+  <!-- Small accent dots -->
+  <circle cx="18" cy="12" r="1.5" fill="white" opacity="0.6"/>
+  <circle cx="46" cy="52" r="1.5" fill="white" opacity="0.6"/>
+</svg>

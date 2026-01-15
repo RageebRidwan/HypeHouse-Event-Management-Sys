@@ -5,6 +5,11 @@ import "./globals.css";
 export const metadata = {
   title: "Hypehouse - Event Management Platform",
   description: "Create, discover, and join amazing events. Connect with people and make memories.",
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+  },
 };
 
 export default function RootLayout({
