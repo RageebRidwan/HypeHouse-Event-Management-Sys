@@ -20,7 +20,7 @@ import DateTimePicker from "../../../../../components/ui/DateTimePicker";
 import { FormInput } from "../../../../../components/features/FormInput";
 import { SubmitButton } from "../../../../../components/features/SubmitButton";
 import { useGetEventByIdQuery, useUpdateEventMutation } from "../../../../../store/api/eventsApi";
-import type { CreateEventInput } from "../../../../../types/event";
+import type { UpdateEventInput } from "../../../../../types/event";
 import { EVENT_TYPES } from "../../../../../lib/constants";
 import { EventStatus } from "../../../../../types/event";
 
@@ -36,7 +36,7 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
   const { data: eventData, isLoading: isLoadingEvent } = useGetEventByIdQuery(eventId);
   const [updateEvent, { isLoading }] = useUpdateEventMutation();
   const [currentStep, setCurrentStep] = useState(1);
-  const [formData, setFormData] = useState<Partial<CreateEventInput & { status?: EventStatus }>>({
+  const [formData, setFormData] = useState<Partial<UpdateEventInput>>({
     title: "",
     eventType: "",
     date: "",
@@ -74,7 +74,7 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
     }
   }, [eventData]);
 
-  const handleChange = (field: keyof CreateEventInput, value: any) => {
+  const handleChange = (field: keyof UpdateEventInput, value: any) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     // Clear error when user starts typing
     if (errors[field]) {
