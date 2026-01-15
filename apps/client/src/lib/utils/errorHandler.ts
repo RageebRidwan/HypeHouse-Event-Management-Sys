@@ -22,7 +22,7 @@ export function getErrorMessage(
   error: unknown,
   fallback: string = "An unexpected error occurred. Please try again."
 ): string {
-  if (\!error) return fallback;
+  if (!error) return fallback;
 
   // Handle RTK Query errors
   const rtkError = error as RTKQueryError;

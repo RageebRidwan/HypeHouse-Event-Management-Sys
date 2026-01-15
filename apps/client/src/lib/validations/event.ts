@@ -11,7 +11,7 @@ export const createEventSchema = z.object({
     .max(2000, "Description must be less than 2000 characters"),
   
   eventType: z.enum(["CONCERT", "WORKSHOP", "MEETUP", "CONFERENCE", "PARTY", "SPORTS", "OTHER"], {
-    errorMap: () => ({ message: "Please select a valid event type" }),
+    message: "Please select a valid event type",
   }),
   
   date: z.string()

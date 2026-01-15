@@ -3,6 +3,9 @@ export interface User {
   email: string;
   name: string;
   avatar?: string;
+  bio?: string;
+  location?: string;
+  interests?: string[];
   role: string;
   verified: boolean;
   emailVerified: boolean;
