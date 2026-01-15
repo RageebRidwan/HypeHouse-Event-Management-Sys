@@ -3,6 +3,7 @@ import authReducer from "./slices/authSlice";
 import { baseApi } from "./api/baseApi";
 import { adminApi } from "./api/adminApi";
 import { reportsApi } from "./api/reportsApi";
+import { verificationApi } from "./api/verificationApi";
 
 export const makeStore = () => {
   return configureStore({
@@ -11,12 +12,14 @@ export const makeStore = () => {
       [baseApi.reducerPath]: baseApi.reducer,
       [adminApi.reducerPath]: adminApi.reducer,
       [reportsApi.reducerPath]: reportsApi.reducer,
+      [verificationApi.reducerPath]: verificationApi.reducer,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(
         baseApi.middleware,
         adminApi.middleware,
-        reportsApi.middleware
+        reportsApi.middleware,
+        verificationApi.middleware
       ),
     devTools: true,
   });

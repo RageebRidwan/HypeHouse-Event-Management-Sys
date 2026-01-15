@@ -14,6 +14,7 @@ import EmptyState from "@/components/features/EmptyState";
 import EmailVerificationBanner from "@/components/onboarding/EmailVerificationBanner";
 import ProfileCompletionBanner from "@/components/onboarding/ProfileCompletionBanner";
 import HostTermsBanner from "@/components/onboarding/HostTermsBanner";
+import VerificationRequestButton from "@/components/features/VerificationRequestButton";
 import { useGetProfileCompletionQuery } from "@/store/api/usersApi";
 import { toast } from "sonner";
 
@@ -89,6 +90,13 @@ export default function DashboardPage() {
         {user.emailVerified && isProfileComplete && !user.acceptedHostTerms && (
           <div className="mb-8">
             <HostTermsBanner />
+          </div>
+        )}
+
+        {/* Verification Request Section */}
+        {user.emailVerified && isProfileComplete && user.acceptedHostTerms && !user.verified && (
+          <div className="mb-8">
+            <VerificationRequestButton />
           </div>
         )}
 

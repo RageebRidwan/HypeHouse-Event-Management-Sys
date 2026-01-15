@@ -66,6 +66,11 @@ export default function AdminLayout({
       icon: Calendar,
     },
     {
+      href: "/admin/verification",
+      label: "Verification",
+      icon: Shield,
+    },
+    {
       href: "/admin/reports",
       label: "Reports",
       icon: Flag,

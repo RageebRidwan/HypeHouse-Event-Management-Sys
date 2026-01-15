@@ -12,6 +12,7 @@ import {
   CalendarCheck,
   CalendarClock,
   CheckCircle,
+  Shield,
 } from "lucide-react";
 
 export default function AdminDashboard() {
@@ -229,6 +230,13 @@ export default function AdminDashboard() {
           >
             <Calendar className="w-5 h-5 text-purple-400" />
             <span className="text-white font-medium">Manage Events</span>
+          </a>
+          <a
+            href="/admin/verification"
+            className="flex items-center gap-3 p-4 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all"
+          >
+            <Shield className="w-5 h-5 text-purple-400" />
+            <span className="text-white font-medium">Verification Requests</span>
           </a>
           <a
             href="/admin/reports"

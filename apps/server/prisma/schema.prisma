@@ -69,6 +69,12 @@ model User {
   suspendedAt       DateTime?
   suspendedReason   String?
 
+  // Verification Request
+  verificationRequested Boolean      @default(false)
+  verificationRequestedAt DateTime?
+  verificationRejected  Boolean      @default(false)
+  verificationRejectedReason String?
+
   // Email Preferences
   emailPreferences  Json?          // Stores notification preferences
 

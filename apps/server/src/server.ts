@@ -11,6 +11,7 @@ import reviewRoutes from "./modules/reviews/reviews.routes";
 import adminRoutes from "./modules/admin/admin.routes";
 import reportsRoutes from "./modules/reports/reports.routes";
 import cronRoutes from "./modules/cron/cron.routes";
+import verificationRoutes from "./modules/users/verification.routes";
 import { errorHandler, notFoundHandler } from "./middleware/errorHandler";
 import { paymentsController } from "./modules/payments/payments.controller";
 import { startCronJobs } from "./jobs/scheduler";
@@ -54,6 +55,7 @@ app.use("/api/reviews", reviewRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/reports", reportsRoutes);
 app.use("/api/cron", cronRoutes);
+app.use("/api/verification", verificationRoutes);
 
 // 404 handler
 app.use(notFoundHandler);

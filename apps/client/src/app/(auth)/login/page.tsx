@@ -7,7 +7,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
-import { Mail, Lock, Sparkles } from "lucide-react";
+import Image from "next/image";
+import { Mail, Lock } from "lucide-react";
 import { FormInput } from "@/components/features/FormInput";
 import { SubmitButton } from "@/components/features/SubmitButton";
 import { useLogin } from "@/hooks/useAuth";
@@ -62,9 +63,9 @@ export default function LoginPage() {
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-              className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary mb-4 shadow-lg"
+              className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary mb-4 shadow-lg p-3"
             >
-              <Sparkles className="w-8 h-8 text-white" />
+              <Image src="/favicon.svg" alt="Hypehouse Logo" width={40} height={40} className="w-full h-full" />
             </motion.div>
 
             <motion.h1
