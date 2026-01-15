@@ -1,15 +1,6 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "apps/client/package.json",
-      "use": "@vercel/next"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "apps/client/$1"
-    }
-  ]
+  "buildCommand": "cd apps/client && npm install && npm run build",
+  "outputDirectory": "apps/client/.next",
+  "installCommand": "npm install --prefix apps/client",
+  "framework": null
 }
