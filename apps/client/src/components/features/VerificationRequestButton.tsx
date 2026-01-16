@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Shield, CheckCircle2, XCircle, Clock, AlertCircle } from "lucide-react";
-import { toast } from "react-hot-toast";
+import { toast } from "sonner";
 import {
   useGetVerificationStatusQuery,
   useRequestVerificationMutation,
