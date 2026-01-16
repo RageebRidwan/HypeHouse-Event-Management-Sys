@@ -226,7 +226,7 @@ export default function VerificationRequestsPage() {
                             <span className="text-sm text-gray-300">{request.location}</span>
                           </div>
                         )}
-                        {request.rating > 0 && (
+                        {request.rating && request.rating > 0 && (
                           <div className="flex items-center gap-1 px-3 py-1 rounded-lg bg-white/5 border border-white/10">
                             <Star className="w-4 h-4 text-yellow-400" />
                             <span className="text-sm text-white font-medium">
