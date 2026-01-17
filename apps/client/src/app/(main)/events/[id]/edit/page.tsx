@@ -53,14 +53,28 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [tagInput, setTagInput] = useState("");
 
-  // Load existing event data
+  // Load existing event data and check if event can be edited
   useEffect(() => {
     if (eventData?.data) {
       const event = eventData.data;
+
+      // Prevent editing completed or cancelled events
+      if (event.status === EventStatus.COMPLETED) {
+        toast.error("Cannot edit a completed event");
+        router.push(`/events/${eventId}`);
+        return;
+      }
+
+      if (event.status === EventStatus.CANCELLED) {
+        toast.error("Cannot edit a cancelled event");
+        router.push(`/events/${eventId}`);
+        return;
+      }
+
       setFormData({
         title: event.title,
         eventType: event.eventType,
-        date: new Date(event.date).toISOString().slice(0, 16),
+        date: event.date,
         location: event.location,
         description: event.description,
         maxParticipants: event.maxParticipants,
@@ -72,7 +86,7 @@ export default function EditEventPage({ params }: { params: Promise<{ id: string
         status: event.status as EventStatus,
       });
     }
-  }, [eventData]);
+  }, [eventData, router, eventId]);
 
   const handleChange = (field: keyof UpdateEventInput, value: any) => {
     setFormData((prev) => ({ ...prev, [field]: value }));

@@ -194,7 +194,7 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
                   </button>
                 )}
 
-                {isHost && (
+                {isHost && !isEventCompleted && event.status !== EventStatus.CANCELLED && (
                   <>
                     <button
                       onClick={() => router.push(`/events/${event.id}/edit`)}

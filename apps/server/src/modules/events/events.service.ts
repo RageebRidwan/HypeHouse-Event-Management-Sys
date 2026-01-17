@@ -331,7 +331,7 @@ export const updateEvent = async (
   // Check if event exists and user is the host
   const event = await prisma.event.findUnique({
     where: { id: eventId },
-    select: { hostId: true, imageUrl: true },
+    select: { hostId: true, imageUrl: true, status: true },
   });
 
   if (!event) {
@@ -340,6 +340,15 @@ export const updateEvent = async (
 
   if (event.hostId !== hostId) {
     throw new ForbiddenError("Only the event host can update this event");
+  }
+
+  // Prevent editing completed or cancelled events
+  if (event.status === EventStatus.COMPLETED) {
+    throw new BadRequestError("Cannot edit a completed event");
+  }
+
+  if (event.status === EventStatus.CANCELLED) {
+    throw new BadRequestError("Cannot edit a cancelled event");
   }
 
   let imageUrl: string | undefined;

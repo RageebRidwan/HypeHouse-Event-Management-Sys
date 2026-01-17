@@ -249,8 +249,8 @@ export default function EventCard({
         </div>
       </Link>
 
-      {/* Host Actions */}
-      {isHost && (onEdit || onDelete) && (
+      {/* Host Actions - Only show for events that can be edited (not completed or cancelled) */}
+      {isHost && (onEdit || onDelete) && !isExpired && !isCancelled && (
         <div className="absolute bottom-6 right-6 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
           {onEdit && (
             <button
