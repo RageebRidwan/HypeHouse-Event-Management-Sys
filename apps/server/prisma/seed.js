@@ -18,16 +18,37 @@ async function main() {
   const password = await bcrypt.hash("Test123!", 10);
 
   const users = await Promise.all([
+    // Admin user
+    prisma.user.create({
+      data: {
+        email: "admin@hypehouse.com",
+        password,
+        name: "Admin User",
+        role: UserRole.ADMIN,
+        bio: "HypeHouse platform administrator",
+        location: "New York, NY",
+        interests: ["Platform Management", "Community Building", "Events"],
+        avatar: "https://ui-avatars.com/api/?name=Admin+User&background=7c3aed&color=fff&size=200",
+        emailVerified: true,
+        verified: true,
+        acceptedHostTerms: true,
+      },
+    }),
     prisma.user.create({
       data: {
         email: "john.host@test.com",
         password,
         name: "John Host",
         role: UserRole.HOST,
-        bio: "Passionate event organizer and community builder",
+        bio: "Passionate event organizer and community builder with 5+ years of experience",
+        location: "New York, NY",
+        interests: ["Events", "Community", "Networking", "Fitness"],
+        avatar: "https://ui-avatars.com/api/?name=John+Host&background=3b82f6&color=fff&size=200",
+        emailVerified: true,
         verified: true,
         rating: 4.8,
         reviewCount: 15,
+        acceptedHostTerms: true,
       },
     }),
     prisma.user.create({
@@ -36,10 +57,15 @@ async function main() {
         password,
         name: "Sarah Organizer",
         role: UserRole.HOST,
-        bio: "Love bringing people together through amazing experiences",
+        bio: "Love bringing people together through amazing experiences. Specializing in tech and food events.",
+        location: "San Francisco, CA",
+        interests: ["Technology", "Food & Wine", "Music", "Networking"],
+        avatar: "https://ui-avatars.com/api/?name=Sarah+Organizer&background=ec4899&color=fff&size=200",
+        emailVerified: true,
         verified: true,
         rating: 4.9,
         reviewCount: 23,
+        acceptedHostTerms: true,
       },
     }),
     prisma.user.create({
@@ -48,7 +74,11 @@ async function main() {
         password,
         name: "Mike Thompson",
         role: UserRole.USER,
-        bio: "Adventure seeker and fitness enthusiast",
+        bio: "Adventure seeker and fitness enthusiast. Always looking for new experiences!",
+        location: "Seattle, WA",
+        interests: ["Fitness", "Outdoor Activities", "Sports", "Community"],
+        avatar: "https://ui-avatars.com/api/?name=Mike+Thompson&background=10b981&color=fff&size=200",
+        emailVerified: true,
       },
     }),
     prisma.user.create({
@@ -57,7 +87,11 @@ async function main() {
         password,
         name: "Emma Davis",
         role: UserRole.USER,
-        bio: "Tech lover and networking pro",
+        bio: "Tech lover and networking pro. Passionate about AI and Web3.",
+        location: "Austin, TX",
+        interests: ["Technology", "AI", "Web3", "Networking"],
+        avatar: "https://ui-avatars.com/api/?name=Emma+Davis&background=f59e0b&color=fff&size=200",
+        emailVerified: true,
       },
     }),
     prisma.user.create({
@@ -66,6 +100,11 @@ async function main() {
         password,
         name: "Alex Johnson",
         role: UserRole.USER,
+        bio: "Food and music enthusiast exploring new experiences",
+        location: "Chicago, IL",
+        interests: ["Food", "Music", "Art", "Culture"],
+        avatar: "https://ui-avatars.com/api/?name=Alex+Johnson&background=8b5cf6&color=fff&size=200",
+        emailVerified: true,
       },
     }),
   ]);
@@ -344,12 +383,17 @@ async function main() {
   );
   console.log(`   Participants: ${participants.length}`);
   console.log("\n🔐 Test Login Credentials:");
-  console.log("   Email: john.host@test.com");
-  console.log("   Email: sarah.organizer@test.com");
-  console.log("   Email: mike.user@test.com");
-  console.log("   Email: emma.participant@test.com");
-  console.log("   Email: alex.user@test.com");
-  console.log("   Password (all): Test123!");
+  console.log("   👑 ADMIN:");
+  console.log("      Email: admin@hypehouse.com");
+  console.log("      Password: Test123!");
+  console.log("\n   🎭 HOSTS:");
+  console.log("      Email: john.host@test.com");
+  console.log("      Email: sarah.organizer@test.com");
+  console.log("\n   👥 USERS:");
+  console.log("      Email: mike.user@test.com");
+  console.log("      Email: emma.participant@test.com");
+  console.log("      Email: alex.user@test.com");
+  console.log("\n   Password (all): Test123!");
 }
 
 main()
