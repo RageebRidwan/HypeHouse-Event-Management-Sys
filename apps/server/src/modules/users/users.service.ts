@@ -9,6 +9,8 @@ export interface UserProfile {
   name: string;
   avatar: string | null;
   bio: string | null;
+  location: string | null;
+  interests: string[];
   role: string;
   verified: boolean;
   createdAt: Date;
@@ -44,6 +46,8 @@ export const getUserById = async (userId: string): Promise<UserProfile> => {
       name: true,
       avatar: true,
       bio: true,
+      location: true,
+      interests: true,
       role: true,
       verified: true,
       createdAt: true,
@@ -101,6 +105,8 @@ export const getUserById = async (userId: string): Promise<UserProfile> => {
     name: user.name,
     avatar: user.avatar,
     bio: user.bio,
+    location: user.location,
+    interests: user.interests || [],
     role: user.role,
     verified: user.verified,
     createdAt: user.createdAt,
