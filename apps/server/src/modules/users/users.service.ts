@@ -197,7 +197,7 @@ export const updateProfileExtended = async (
   data: {
     name?: string;
     bio?: string;
-    avatar?: string;
+    avatar?: string | null;
     location?: string;
     interests?: string[];
   }
@@ -207,15 +207,22 @@ export const updateProfileExtended = async (
     throw new BadRequestError("Maximum 10 interests allowed");
   }
 
+  // Build update data - handle avatar separately to allow null values
+  const updateData: Record<string, unknown> = {};
+
+  if (data.name) updateData.name = data.name;
+  if (data.bio) updateData.bio = data.bio;
+  if (data.location) updateData.location = data.location;
+  if (data.interests) updateData.interests = data.interests;
+
+  // Avatar can be set to null (to remove it) or a new string
+  if (data.avatar !== undefined) {
+    updateData.avatar = data.avatar;
+  }
+
   await prisma.user.update({
     where: { id: userId },
-    data: {
-      ...(data.name && { name: data.name }),
-      ...(data.bio && { bio: data.bio }),
-      ...(data.avatar && { avatar: data.avatar }),
-      ...(data.location && { location: data.location }),
-      ...(data.interests && { interests: data.interests }),
-    },
+    data: updateData,
   });
 
   return getProfileCompletion(userId);
