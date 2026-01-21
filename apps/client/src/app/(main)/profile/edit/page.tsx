@@ -175,7 +175,7 @@ export default function ProfileEditPage() {
       const newAvatar = avatarToUpdate !== undefined ? avatarToUpdate : profile?.avatar;
       dispatch(updateUser({
         name: formData.name,
-        avatar: (newAvatar || null) as string | null,
+        avatar: newAvatar || undefined,
         bio: formData.bio,
       }));
 
