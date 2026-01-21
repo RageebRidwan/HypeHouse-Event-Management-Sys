@@ -715,7 +715,7 @@ export default function CreateEventPage() {
                       <div className="flex justify-between">
                         <span className="text-gray-400">Price:</span>
                         <span className="text-white font-medium">
-                          {formData.price === 0 ? "Free" : `$${formData.price}`}
+                          {formData.price == null || formData.price === "" ? "-" : Number(formData.price) === 0 ? "Free" : `$${formData.price}`}
                         </span>
                       </div>
                     </div>
