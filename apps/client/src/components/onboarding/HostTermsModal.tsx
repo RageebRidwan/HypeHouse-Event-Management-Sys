@@ -46,7 +46,21 @@ export default function HostTermsModal({ isOpen, onClose, onAccept }: HostTermsM
       onAccept?.();
       onClose();
     } catch (error: any) {
-      toast.error(error?.data?.error || "Failed to accept host terms");
+      const errorMessage = error?.data?.error || "Failed to accept host terms";
+
+      // If terms already accepted, update Redux state anyway and close
+      if (errorMessage.includes("already accepted")) {
+        dispatch(updateUser({
+          role: "HOST",
+          acceptedHostTerms: true
+        }));
+        toast.success("Host terms already accepted! You can create events.");
+        onAccept?.();
+        onClose();
+        return;
+      }
+
+      toast.error(errorMessage);
     }
   };
 
