@@ -39,6 +39,7 @@ export default function ProfileEditPage() {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [avatarUrl, setAvatarUrl] = useState("");
+  const [wantsToRemovePhoto, setWantsToRemovePhoto] = useState(false);
 
   // Initialize form data when profile loads
   useEffect(() => {
@@ -88,6 +89,7 @@ export default function ProfileEditPage() {
     }
 
     setSelectedFile(file);
+    setWantsToRemovePhoto(false);
 
     // Create preview
     const reader = new FileReader();
@@ -139,7 +141,7 @@ export default function ProfileEditPage() {
     if (!currentUser?.id) return;
 
     try {
-      let avatarToUpdate: string | undefined = undefined;
+      let avatarToUpdate: string | null | undefined = undefined;
 
       // Upload image first if selected
       if (selectedFile) {
@@ -149,23 +151,31 @@ export default function ProfileEditPage() {
       } else if (avatarUrl.trim()) {
         // Use the provided URL
         avatarToUpdate = avatarUrl.trim();
+      } else if (wantsToRemovePhoto) {
+        // User wants to remove the avatar
+        avatarToUpdate = null;
       }
 
       // Update profile with extended data
-      const updateData = {
+      const updateData: Record<string, unknown> = {
         name: formData.name,
         bio: formData.bio || undefined,
         location: formData.location || undefined,
         interests: formData.interests.length > 0 ? formData.interests : undefined,
-        ...(avatarToUpdate && { avatar: avatarToUpdate }),
       };
+
+      // Only include avatar if it's being changed
+      if (avatarToUpdate !== undefined) {
+        updateData.avatar = avatarToUpdate;
+      }
 
       await updateProfileExtended(updateData as any).unwrap();
 
       // Update auth state with new profile data
+      const newAvatar = avatarToUpdate !== undefined ? avatarToUpdate : profile?.avatar;
       dispatch(updateUser({
         name: formData.name,
-        avatar: (profile?.avatar || null) as any,
+        avatar: (newAvatar || null) as string | null,
         bio: formData.bio,
       }));
 
@@ -283,12 +293,14 @@ export default function ProfileEditPage() {
                     )}
                   </button>
 
-                  {(imagePreview || profile?.avatar) && (
+                  {(imagePreview || (profile?.avatar && !wantsToRemovePhoto)) && (
                     <button
                       type="button"
                       onClick={() => {
                         setSelectedFile(null);
                         setImagePreview(null);
+                        setAvatarUrl("");
+                        setWantsToRemovePhoto(true);
                         if (fileInputRef.current) {
                           fileInputRef.current.value = "";
                         }
@@ -320,6 +332,7 @@ export default function ProfileEditPage() {
                       if (e.target.value.trim()) {
                         setImagePreview(e.target.value.trim());
                         setSelectedFile(null);
+                        setWantsToRemovePhoto(false);
                       }
                     }}
                     placeholder="https://example.com/image.jpg"
