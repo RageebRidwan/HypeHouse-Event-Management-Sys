@@ -49,12 +49,12 @@ export function ParticipantAvatars({
                 alt={participant.name}
                 width={32}
                 height={32}
-                className="w-8 h-8 rounded-full border-2 border-white dark:border-gray-800 transition-transform group-hover:scale-110"
+                className="w-8 h-8 rounded-full border-2 border-purple-500 transition-transform group-hover:scale-110"
                 title={participant.name}
               />
             ) : (
               <div
-                className="w-8 h-8 rounded-full border-2 border-white dark:border-gray-800 bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white text-xs font-medium transition-transform group-hover:scale-110"
+                className="w-8 h-8 rounded-full border-2 border-purple-500 bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center text-white text-xs font-medium transition-transform group-hover:scale-110"
                 title={participant.name}
               >
                 {participant.name.charAt(0).toUpperCase()}
@@ -68,7 +68,7 @@ export function ParticipantAvatars({
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: displayParticipants.length * 0.05 }}
-            className="w-8 h-8 rounded-full border-2 border-white dark:border-gray-800 bg-gray-200 dark:bg-gray-700 flex items-center justify-center text-gray-700 dark:text-gray-300 text-xs font-medium transition-transform group-hover:scale-110"
+            className="w-8 h-8 rounded-full border-2 border-purple-500 bg-purple-600/50 flex items-center justify-center text-white text-xs font-medium transition-transform group-hover:scale-110"
             title={`+${remainingCount} more`}
           >
             +{remainingCount}
@@ -77,7 +77,7 @@ export function ParticipantAvatars({
       </div>
 
       {onClick && (
-        <span className="ml-3 text-sm text-gray-600 dark:text-gray-400 group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+        <span className="ml-3 text-sm text-gray-300 group-hover:text-purple-400 transition-colors">
           {participants.length === 1
             ? "1 participant"
             : `${participants.length} participants`}
