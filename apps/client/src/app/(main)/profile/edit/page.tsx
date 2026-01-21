@@ -420,7 +420,7 @@ export default function ProfileEditPage() {
               {/* Location */}
               <div>
                 <label htmlFor="location" className="block text-sm font-medium text-gray-300 mb-2">
-                  Location <span className="text-yellow-400">*</span>
+                  Location
                 </label>
                 <input
                   type="text"
@@ -430,13 +430,13 @@ export default function ProfileEditPage() {
                   className="w-full px-4 py-3 rounded-xl backdrop-blur-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                   placeholder="e.g., Dhaka, Bangladesh"
                 />
-                <p className="text-xs text-gray-500 mt-1">Required for hosting events</p>
+                <p className="text-xs text-gray-500 mt-1">Optional</p>
               </div>
 
               {/* Interests */}
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Interests <span className="text-yellow-400">* (minimum 3)</span>
+                  Interests
                 </label>
 
                 {/* Interest Input */}
@@ -486,7 +486,7 @@ export default function ProfileEditPage() {
                 )}
 
                 <p className="text-xs text-gray-500">
-                  {formData.interests.length} / 10 interests ({Math.max(0, 3 - formData.interests.length)} more needed)
+                  {formData.interests.length} / 10 interests
                 </p>
               </div>
             </div>
