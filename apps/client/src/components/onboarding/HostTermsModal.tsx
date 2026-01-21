@@ -38,7 +38,8 @@ export default function HostTermsModal({ isOpen, onClose, onAccept }: HostTermsM
 
       // Update user in Redux state
       dispatch(updateUser({
-        role: "HOST" // Backend automatically promotes to HOST upon accepting terms
+        role: "HOST", // Backend automatically promotes to HOST upon accepting terms
+        acceptedHostTerms: true
       }));
 
       toast.success("Host terms accepted! You can now create events.");
