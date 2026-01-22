@@ -51,7 +51,7 @@ export default function CreateEventPage() {
   useEffect(() => {
     if (!isAuthenticated) {
       toast.error("Please login to create an event");
-      router.push("/login?redirect=/events/create");
+      router.replace("/login?redirect=/events/create");
     }
   }, [isAuthenticated, router]);
 
