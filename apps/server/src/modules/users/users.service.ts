@@ -256,6 +256,7 @@ export const acceptHostTerms = async (userId: string) => {
     data: {
       acceptedHostTerms: true,
       hostTermsAcceptedAt: new Date(),
+      role: "HOST",
     },
   });
 
