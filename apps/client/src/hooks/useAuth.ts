@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { toast } from "sonner";
 import { useLoginMutation, useRegisterMutation } from "@/store/api/authApi";
 import { setCredentials, logout as logoutAction } from "@/store/slices/authSlice";
+import { baseApi } from "@/store/api/baseApi";
 import type { LoginInput, RegisterInput } from "@/types/auth";
 
 export const useLogin = () => {
@@ -86,6 +87,9 @@ export const useLogout = () => {
   const dispatch = useDispatch();
 
   const logout = () => {
+    // Reset API cache to clear previous user's data
+    dispatch(baseApi.util.resetApiState());
+
     // Dispatch logout action
     dispatch(logoutAction());
 
