@@ -6,49 +6,57 @@ import { Music, Footprints, Mountain, Utensils, Gamepad2, Laptop, Palette, Spark
 
 const categories = [
   {
-    name: "Concert",
+    name: "Music & Concert",
+    displayName: "Concert",
     icon: Music,
     gradient: "from-purple-500 to-pink-500",
     hoverGradient: "from-purple-600 to-pink-600",
   },
   {
-    name: "Sports",
+    name: "Sports & Fitness",
+    displayName: "Sports",
     icon: Footprints,
     gradient: "from-blue-500 to-cyan-500",
     hoverGradient: "from-blue-600 to-cyan-600",
   },
   {
-    name: "Meetup",
+    name: "Social & Networking",
+    displayName: "Social",
     icon: Mountain,
     gradient: "from-green-500 to-emerald-500",
     hoverGradient: "from-green-600 to-emerald-600",
   },
   {
-    name: "Party",
+    name: "Food & Drink",
+    displayName: "Food & Drink",
     icon: Utensils,
     gradient: "from-orange-500 to-red-500",
     hoverGradient: "from-orange-600 to-red-600",
   },
   {
-    name: "Festival",
-    icon: Gamepad2,
+    name: "Tech & Innovation",
+    displayName: "Tech",
+    icon: Laptop,
     gradient: "from-pink-500 to-rose-500",
     hoverGradient: "from-pink-600 to-rose-600",
   },
   {
-    name: "Conference",
-    icon: Laptop,
+    name: "Education & Learning",
+    displayName: "Education",
+    icon: Palette,
     gradient: "from-indigo-500 to-purple-500",
     hoverGradient: "from-indigo-600 to-purple-600",
   },
   {
-    name: "Workshop",
-    icon: Palette,
+    name: "Networking",
+    displayName: "Networking",
+    icon: Gamepad2,
     gradient: "from-yellow-500 to-orange-500",
     hoverGradient: "from-yellow-600 to-orange-600",
   },
   {
-    name: "Other",
+    name: "Meetup",
+    displayName: "Meetup",
     icon: Sparkles,
     gradient: "from-violet-500 to-fuchsia-500",
     hoverGradient: "from-violet-600 to-fuchsia-600",
@@ -109,7 +117,7 @@ export function CategoryGrid() {
 
                   {/* Category name */}
                   <h3 className="text-lg font-bold text-white mb-1">
-                    {category.name}
+                    {category.displayName}
                   </h3>
 
                   {/* Hover arrow */}
