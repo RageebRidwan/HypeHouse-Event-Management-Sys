@@ -1,172 +1,122 @@
-# Hypehouse - Event Management Platform
+# HypeHouse - Event Management Platform
 
-A modern monorepo event management platform built with Next.js, Express, and Prisma.
+A full-stack event management platform where users can discover, create, and join events. Built with modern technologies and a focus on user experience.
+
+## Live Demo
+
+**Production:** [hypehouse.vercel.app](https://hypehouse.vercel.app)
+
+## Features
+
+### For Users
+- Browse and search events by type, date, location, and price
+- Join free events instantly or pay for premium events via Stripe
+- Leave reviews and ratings for attended events
+- Manage profile with avatar, bio, location, and interests
+
+### For Hosts
+- Create and manage events with rich details and images
+- Track participants and event statistics
+- Receive payments directly through Stripe Connect
+
+### For Admins
+- Dashboard with platform analytics
+- User management (suspend, change roles, delete)
+- Event moderation and oversight
+- Host verification system
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Frontend | Next.js 15, TypeScript, Tailwind CSS, Redux Toolkit |
+| Backend | Express.js, TypeScript, Prisma ORM |
+| Database | PostgreSQL |
+| Authentication | JWT |
+| Payments | Stripe |
+| File Storage | Cloudinary |
+| Deployment | Vercel (Frontend), Render (Backend) |
 
 ## Project Structure
 
 ```
 hypehouse/
 ├── apps/
-│   ├── client/          # Next.js 15 frontend with RTK Query
-│   └── server/          # Express backend with Prisma ORM
+│   ├── client/     # Next.js frontend
+│   └── server/     # Express backend
 └── packages/
-    └── types/           # Shared TypeScript types
+    └── types/      # Shared TypeScript types
 ```
-
-## Tech Stack
-
-### Frontend (apps/client)
-- **Framework**: Next.js 15 (App Router)
-- **State Management**: Redux Toolkit with RTK Query
-- **Styling**: Tailwind CSS v4
-- **Form Handling**: React Hook Form + Zod
-- **UI Components**: Custom components with Framer Motion
-- **Icons**: Lucide React
-- **Notifications**: Sonner
-
-### Backend (apps/server)
-- **Framework**: Express.js
-- **ORM**: Prisma
-- **Database**: PostgreSQL
-- **Authentication**: JWT with bcryptjs
-- **Validation**: Zod
-
-### Shared (packages/types)
-- TypeScript type definitions shared across frontend and backend
 
 ## Getting Started
 
 ### Prerequisites
 - Node.js 18+
-- PostgreSQL database
-- npm
+- PostgreSQL
+- Stripe account (for payments)
+- Cloudinary account (for image uploads)
 
 ### Installation
 
-1. Clone the repository
-2. Install dependencies:
 ```bash
+# Clone and install
+git clone https://github.com/RageebRidwan/HypeHouse-Event-Management-Sys.git
+cd hypehouse
 npm install
-```
 
-3. Set up environment variables:
+# Set up environment variables (see .env.example files)
 
-**Frontend** (apps/client/.env.local):
-```env
-NEXT_PUBLIC_API_URL=http://localhost:5000/api
-NEXT_PUBLIC_STRIPE_PUBLIC_KEY=your_stripe_key
-NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=your_cloudinary_name
-NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET=your_preset
-```
-
-**Backend** (apps/server/.env):
-```env
-DATABASE_URL="postgresql://user:password@localhost:5432/hypehouse?schema=public"
-PORT=5000
-JWT_SECRET=your-secret-key-change-this-in-production
-NODE_ENV=development
-```
-
-4. Set up the database:
-```bash
+# Initialize database
 cd apps/server
 npm run prisma:migrate
 npm run prisma:generate
-```
+npm run seed  # Optional: seed with sample data
 
-### Development
-
-Run both frontend and backend concurrently:
-```bash
+# Run development servers
+cd ../..
 npm run dev
 ```
 
-Or run them separately:
+### Environment Variables
 
-**Frontend only**:
-```bash
-npm run dev:client
+**Frontend** (`apps/client/.env.local`)
+```
+NEXT_PUBLIC_API_URL=http://localhost:5000/api
+NEXT_PUBLIC_STRIPE_PUBLIC_KEY=pk_test_xxx
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=xxx
+NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET=xxx
 ```
 
-**Backend only**:
-```bash
-npm run dev:server
+**Backend** (`apps/server/.env`)
+```
+DATABASE_URL=postgresql://user:pass@localhost:5432/hypehouse
+JWT_SECRET=your-secret-key
+STRIPE_SECRET_KEY=sk_test_xxx
+CLOUDINARY_CLOUD_NAME=xxx
+CLOUDINARY_API_KEY=xxx
+CLOUDINARY_API_SECRET=xxx
 ```
 
-### Building for Production
+## API Overview
 
-Build all workspaces:
+| Endpoint | Description |
+|----------|-------------|
+| `POST /api/auth/register` | Register new user |
+| `POST /api/auth/login` | Authenticate user |
+| `GET /api/events` | List events with filters |
+| `POST /api/events` | Create event (hosts only) |
+| `POST /api/participants/events/:id/join` | Join an event |
+| `POST /api/payments/create-intent` | Create Stripe payment |
+| `GET /api/admin/stats` | Platform statistics (admin) |
+
+## Scripts
+
 ```bash
-npm run build
+npm run dev          # Run both frontend and backend
+npm run dev:client   # Frontend only
+npm run dev:server   # Backend only
+npm run build        # Build all workspaces
 ```
-
-Build specific workspace:
-```bash
-npm run build:client
-npm run build:server
-```
-
-## Features
-
-- User authentication and authorization
-- Event creation and management
-- Event discovery and filtering
-- Participant management
-- Reviews and ratings
-- Real-time updates
-- Responsive design with dark mode
-- Image uploads (Cloudinary)
-- Payment processing (Stripe)
-
-## Database Schema
-
-The project uses Prisma ORM with the following main models:
-- **User**: User accounts with roles (USER, HOST, ADMIN)
-- **Event**: Events with details, status, and location
-- **Participant**: Event participation tracking
-- **Review**: User reviews and ratings
-
-## API Endpoints
-
-Base URL: `http://localhost:5000/api`
-
-- `GET /health` - Health check
-- `POST /auth/register` - User registration
-- `POST /auth/login` - User login
-- `GET /events` - List events
-- `POST /events` - Create event
-- `GET /events/:id` - Get event details
-- `GET /users/:id` - Get user profile
-- `PATCH /users/:id` - Update user profile
-
-## Workspace Commands
-
-Each workspace has its own package.json with specific scripts:
-
-### Client (apps/client)
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint
-
-### Server (apps/server)
-- `npm run dev` - Start development server with hot reload
-- `npm run build` - Compile TypeScript
-- `npm run start` - Start production server
-- `npm run prisma:generate` - Generate Prisma client
-- `npm run prisma:migrate` - Run database migrations
-- `npm run prisma:studio` - Open Prisma Studio
-
-### Types (packages/types)
-- `npm run build` - Compile types
-- `npm run dev` - Watch mode for type compilation
-
-## Contributing
-
-1. Create a feature branch
-2. Make your changes
-3. Test thoroughly
-4. Submit a pull request
 
 ## License
 

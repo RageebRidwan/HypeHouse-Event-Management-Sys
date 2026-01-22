@@ -42,7 +42,7 @@ coverage/
 # Deployment
 .vercel/
 
-# Claude Code
+# IDE/Editor configs
 .claude/
 
 # Temporary files
