@@ -148,7 +148,7 @@ export default function UserProfilePage({ params }: { params: Promise<{ id: stri
               </div>
 
               {profile.bio && (
-                <p className="text-gray-200 mt-4 leading-relaxed max-w-2xl">
+                <p className="text-gray-200 mt-4 leading-relaxed max-w-2xl break-words overflow-hidden">
                   {profile.bio}
                 </p>
               )}
